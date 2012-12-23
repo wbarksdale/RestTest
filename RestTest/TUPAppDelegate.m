@@ -7,14 +7,89 @@
 //
 
 #import "TUPAppDelegate.h"
+#import <RestKit/RestKit.h>
+#import "TUPUser.h"
 
 @implementation TUPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    RKLogConfigureByName("RestKit/Network*", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+    
+    
+    
+    /********************
+     * First we configure the HTTPClient with a url and set any headers we need to
+     ********************/
+    
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
+    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:8080"];
+    
+    AFHTTPClient* client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    
+    [client setDefaultHeader:@"Accept" value:RKMIMETypeJSON];
+    
+    
+    /*********************
+     * The objectManager here is basically a singleton that can be
+     *  accessed with the class method RKObjectManaker sharedInstance
+     * 
+     * You tell the object manager about the objects you want to map,
+     *  and the API end points that you are going to talk to.
+     *
+     * Response / Request descriptors kindof describe an API end point
+     *  and how to map objects to and from that endpoint
+     *********************/
+    
+    RKObjectManager *objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
+    objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
+    
+    RKObjectMapping *userMapping = [RKObjectMapping mappingForClass:[TUPUser class]];
+    [userMapping addAttributeMappingsFromDictionary:@{
+     @"name" : @"name",
+     @"username" : @"username",
+     @"age" : @"age"
+     }];
+    
+    RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
+    
+    // the mappings from array syntax appears to basically assume that the json
+    //  fields are identical to your object fields.
+    [requestMapping addAttributeMappingsFromArray:@[@"username", @"name", @"age"]];
+    
+    
+    //[RKObjectMapping addDefaultDateFormatterForString:@"E MMM d HH:mm:ss Z y" inTimeZone:nil];
+    
+
+    RKResponseDescriptor *getUserDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:userMapping
+                                                                                       pathPattern:@"/user/:username"
+                                                                                           keyPath:nil
+                                                                                       statusCodes:[NSIndexSet indexSetWithIndex:200]];
+    
+    RKResponseDescriptor *listUsersDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:userMapping
+                                                                                       pathPattern:@"/users"
+                                                                                           keyPath:nil
+                                                                                       statusCodes:[NSIndexSet indexSetWithIndex:200]];
+    
+    RKRequestDescriptor *postUserDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping
+                                                                                    objectClass:[TUPUser class]
+                                                                                    rootKeyPath:nil];
+    [objectManager addResponseDescriptor:getUserDescriptor];
+    [objectManager addResponseDescriptor:listUsersDescriptor];
+    [objectManager addRequestDescriptor:postUserDescriptor];
+    
     return YES;
 }
+
+
+/******************
+ * The below methods are just stubs for hooking into different points in the
+ * application life cycle. Such as when the user closes, or re-opens the app, etc...
+ ******************/
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

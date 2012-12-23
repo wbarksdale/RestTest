@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
 
-@interface TUPViewController : UIViewController
+@interface TUPViewController : UITableViewController
+
+@property(nonatomic, retain) NSMutableArray *users;
+
+- (IBAction)addUser:(id)sender;
 
 @end

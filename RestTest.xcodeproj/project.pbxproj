@@ -24,6 +24,11 @@
 		5A2945E3168532EC00B23A22 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2945BB168532EC00B23A22 /* Foundation.framework */; };
 		5A2945EB168532ED00B23A22 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A2945E9168532ED00B23A22 /* InfoPlist.strings */; };
 		5A2945EE168532ED00B23A22 /* RestTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2945ED168532ED00B23A22 /* RestTestTests.m */; };
+		5A294604168539AE00B23A22 /* TUPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A294603168539AE00B23A22 /* TUPUser.m */; };
+		5A294605168539AE00B23A22 /* TUPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A294603168539AE00B23A22 /* TUPUser.m */; };
+		5A84F65A168671E30046AE0F /* TUPUserDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A84F659168671E30046AE0F /* TUPUserDetailController.m */; };
+		5A84F65B168671E30046AE0F /* TUPUserDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A84F659168671E30046AE0F /* TUPUserDetailController.m */; };
+		A805273DDB2148AD9CBB4532 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E39413E6953B45408138002D /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4198878F4ED94004B3F89E9D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		5A2945B5168532EC00B23A22 /* RestTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A2945B9168532EC00B23A22 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5A2945BB168532EC00B23A22 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -60,6 +66,11 @@
 		5A2945EA168532ED00B23A22 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A2945EC168532ED00B23A22 /* RestTestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestTestTests.h; sourceTree = "<group>"; };
 		5A2945ED168532ED00B23A22 /* RestTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RestTestTests.m; sourceTree = "<group>"; };
+		5A294602168539AE00B23A22 /* TUPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUPUser.h; sourceTree = "<group>"; };
+		5A294603168539AE00B23A22 /* TUPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUPUser.m; sourceTree = "<group>"; };
+		5A84F658168671E30046AE0F /* TUPUserDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUPUserDetailController.h; sourceTree = "<group>"; };
+		5A84F659168671E30046AE0F /* TUPUserDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUPUserDetailController.m; sourceTree = "<group>"; };
+		E39413E6953B45408138002D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +81,7 @@
 				5A2945BA168532EC00B23A22 /* UIKit.framework in Frameworks */,
 				5A2945BC168532EC00B23A22 /* Foundation.framework in Frameworks */,
 				5A2945BE168532EC00B23A22 /* CoreGraphics.framework in Frameworks */,
+				A805273DDB2148AD9CBB4532 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +105,7 @@
 				5A2945E6168532EC00B23A22 /* RestTestTests */,
 				5A2945B8168532EC00B23A22 /* Frameworks */,
 				5A2945B6168532EC00B23A22 /* Products */,
+				4198878F4ED94004B3F89E9D /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +125,7 @@
 				5A2945BB168532EC00B23A22 /* Foundation.framework */,
 				5A2945BD168532EC00B23A22 /* CoreGraphics.framework */,
 				5A2945E0168532EC00B23A22 /* SenTestingKit.framework */,
+				E39413E6953B45408138002D /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,10 +133,13 @@
 		5A2945BF168532EC00B23A22 /* RestTest */ = {
 			isa = PBXGroup;
 			children = (
+				5A294602168539AE00B23A22 /* TUPUser.h */,
+				5A294603168539AE00B23A22 /* TUPUser.m */,
 				5A2945C8168532EC00B23A22 /* TUPAppDelegate.h */,
 				5A2945C9168532EC00B23A22 /* TUPAppDelegate.m */,
 				5A2945D1168532EC00B23A22 /* MainStoryboard_iPhone.storyboard */,
-				5A2945D4168532EC00B23A22 /* MainStoryboard_iPad.storyboard */,
+				5A84F658168671E30046AE0F /* TUPUserDetailController.h */,
+				5A84F659168671E30046AE0F /* TUPUserDetailController.m */,
 				5A2945D7168532EC00B23A22 /* TUPViewController.h */,
 				5A2945D8168532EC00B23A22 /* TUPViewController.m */,
 				5A2945C0168532EC00B23A22 /* Supporting Files */,
@@ -133,6 +150,7 @@
 		5A2945C0168532EC00B23A22 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5A2945D4168532EC00B23A22 /* MainStoryboard_iPad.storyboard */,
 				5A2945C1168532EC00B23A22 /* RestTest-Info.plist */,
 				5A2945C2168532EC00B23A22 /* InfoPlist.strings */,
 				5A2945C5168532EC00B23A22 /* main.m */,
@@ -173,6 +191,7 @@
 				5A2945B1168532EC00B23A22 /* Sources */,
 				5A2945B2168532EC00B23A22 /* Frameworks */,
 				5A2945B3168532EC00B23A22 /* Resources */,
+				C977F6C6B08741B1B5D9BC3A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -268,6 +287,20 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		C977F6C6B08741B1B5D9BC3A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -278,6 +311,8 @@
 				5A2945C6168532EC00B23A22 /* main.m in Sources */,
 				5A2945CA168532EC00B23A22 /* TUPAppDelegate.m in Sources */,
 				5A2945D9168532EC00B23A22 /* TUPViewController.m in Sources */,
+				5A294604168539AE00B23A22 /* TUPUser.m in Sources */,
+				5A84F65A168671E30046AE0F /* TUPUserDetailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +321,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A2945EE168532ED00B23A22 /* RestTestTests.m in Sources */,
+				5A294605168539AE00B23A22 /* TUPUser.m in Sources */,
+				5A84F65B168671E30046AE0F /* TUPUserDetailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +426,7 @@
 		};
 		5A2945F2168532ED00B23A22 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4198878F4ED94004B3F89E9D /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RestTest/RestTest-Prefix.pch";
@@ -400,6 +438,7 @@
 		};
 		5A2945F3168532ED00B23A22 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4198878F4ED94004B3F89E9D /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RestTest/RestTest-Prefix.pch";
@@ -462,6 +501,7 @@
 				5A2945F3168532ED00B23A22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5A2945F4168532ED00B23A22 /* Build configuration list for PBXNativeTarget "RestTestTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +510,7 @@
 				5A2945F6168532ED00B23A22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
