@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController id="03H-4X-2ut" customClass="TUPViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1U6-yf-E8r">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -48,7 +48,7 @@
             <objects>
                 <viewController storyboardIdentifier="UserDetailVC" id="Yfc-Qh-t2i" customClass="TUPUserDetailController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kwj-Uf-N9B">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="username: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kz-rr-OjA">
@@ -85,10 +85,16 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EkT-f2-GkX">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Yfc-Qh-t2i" id="jo9-PZ-n23"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VvA-3V-6My">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Yfc-Qh-t2i" id="bhe-fz-zBD"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZP-sX-yUv">
                                 <constraints>
@@ -98,26 +104,34 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="o09-MX-fyd">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="179" id="GHH-6S-Adt"/>
+                                    <constraint firstAttribute="height" constant="179" id="tPk-W0-y02"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="VvA-3V-6My" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="21j-27-VU0"/>
-                            <constraint firstAttribute="trailing" secondItem="FZP-sX-yUv" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="6aF-Wb-0Az"/>
-                            <constraint firstItem="5Xe-Ar-4V3" firstAttribute="top" secondItem="Kwj-Uf-N9B" secondAttribute="top" constant="62" id="Cg4-5D-v1j"/>
+                            <constraint firstAttribute="trailing" secondItem="FZP-sX-yUv" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="5t6-L6-5jb"/>
+                            <constraint firstItem="o09-MX-fyd" firstAttribute="centerX" secondItem="Kwj-Uf-N9B" secondAttribute="centerX" type="default" id="9UE-Lx-RMr"/>
+                            <constraint firstItem="FZP-sX-yUv" firstAttribute="leading" secondItem="1kz-rr-OjA" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="AYn-CV-U7Z"/>
+                            <constraint firstAttribute="bottom" secondItem="3Mt-OP-qfH" secondAttribute="bottom" constant="32" id="CCl-jA-CUH"/>
+                            <constraint firstItem="o09-MX-fyd" firstAttribute="top" secondItem="Kwj-Uf-N9B" secondAttribute="top" constant="7" id="DKF-hh-fwl"/>
                             <constraint firstItem="1kz-rr-OjA" firstAttribute="leading" secondItem="Kwj-Uf-N9B" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="EiX-Ig-Qyv"/>
+                            <constraint firstAttribute="bottom" secondItem="5Xe-Ar-4V3" secondAttribute="bottom" constant="146" id="Fhg-dT-nK6"/>
                             <constraint firstItem="VvA-3V-6My" firstAttribute="leading" secondItem="MrB-mc-MyY" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="G4x-zU-wZm"/>
                             <constraint firstAttribute="trailing" secondItem="EkT-f2-GkX" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="H3R-o9-U8I"/>
                             <constraint firstItem="3Mt-OP-qfH" firstAttribute="leading" secondItem="Kwj-Uf-N9B" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="IKS-Rw-If8"/>
-                            <constraint firstItem="VvA-3V-6My" firstAttribute="top" secondItem="Kwj-Uf-N9B" secondAttribute="top" constant="98" id="KI0-9z-hZ3"/>
-                            <constraint firstAttribute="trailing" secondItem="3Mt-OP-qfH" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="LrO-ps-ltU"/>
-                            <constraint firstItem="FZP-sX-yUv" firstAttribute="leading" secondItem="1kz-rr-OjA" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Luq-Od-v1f"/>
-                            <constraint firstItem="MrB-mc-MyY" firstAttribute="top" secondItem="Kwj-Uf-N9B" secondAttribute="top" constant="102" id="NEc-QT-CkL"/>
-                            <constraint firstItem="FZP-sX-yUv" firstAttribute="leading" secondItem="EkT-f2-GkX" secondAttribute="leading" type="default" id="QQ1-vt-Fic"/>
-                            <constraint firstItem="3Mt-OP-qfH" firstAttribute="top" secondItem="Kwj-Uf-N9B" secondAttribute="top" constant="147" id="Tgr-6m-neq"/>
+                            <constraint firstAttribute="bottom" secondItem="1kz-rr-OjA" secondAttribute="bottom" constant="184" id="NxX-1I-Y1j"/>
+                            <constraint firstItem="o09-MX-fyd" firstAttribute="centerX" secondItem="3Mt-OP-qfH" secondAttribute="centerX" type="default" id="Tc8-Kg-Oy5"/>
                             <constraint firstItem="EkT-f2-GkX" firstAttribute="leading" secondItem="5Xe-Ar-4V3" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Tyd-b8-NqL"/>
-                            <constraint firstItem="1kz-rr-OjA" firstAttribute="top" secondItem="Kwj-Uf-N9B" secondAttribute="top" constant="24" id="Udb-Cj-XE2"/>
-                            <constraint firstItem="FZP-sX-yUv" firstAttribute="top" secondItem="Kwj-Uf-N9B" secondAttribute="top" constant="22" id="jQo-Gz-jGw"/>
-                            <constraint firstItem="EkT-f2-GkX" firstAttribute="top" secondItem="Kwj-Uf-N9B" secondAttribute="top" constant="58" id="rey-YS-kLZ"/>
+                            <constraint firstAttribute="bottom" secondItem="FZP-sX-yUv" secondAttribute="bottom" constant="181" id="WnL-i8-vDg"/>
+                            <constraint firstAttribute="bottom" secondItem="MrB-mc-MyY" secondAttribute="bottom" constant="106" id="dwW-yW-qqU"/>
+                            <constraint firstAttribute="bottom" secondItem="EkT-f2-GkX" secondAttribute="bottom" constant="141" id="fDv-1w-rtU"/>
+                            <constraint firstItem="FZP-sX-yUv" firstAttribute="leading" secondItem="EkT-f2-GkX" secondAttribute="leading" type="default" id="vWA-xw-jIO"/>
+                            <constraint firstAttribute="bottom" secondItem="VvA-3V-6My" secondAttribute="bottom" constant="101" id="yjg-xM-JFC"/>
                             <constraint firstItem="VvA-3V-6My" firstAttribute="leading" secondItem="EkT-f2-GkX" secondAttribute="leading" type="default" id="ynw-o4-eag"/>
                         </constraints>
                     </view>
@@ -125,6 +139,7 @@
                     <connections>
                         <outlet property="ageField" destination="VvA-3V-6My" id="FsE-3K-hgp"/>
                         <outlet property="nameField" destination="EkT-f2-GkX" id="zzE-pv-7zy"/>
+                        <outlet property="userImage" destination="o09-MX-fyd" id="UUA-w4-Ig9"/>
                         <outlet property="usernameLabel" destination="FZP-sX-yUv" id="mVK-ui-uqO"/>
                     </connections>
                 </viewController>
@@ -148,6 +163,9 @@
             <point key="canvasLocation" x="-925" y="-91"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Default.png" width="320" height="480"/>
+    </resources>
     <classes>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
@@ -158,6 +176,7 @@
                 <relationship kind="action" name="update:"/>
                 <relationship kind="outlet" name="ageField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
@@ -171,6 +190,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

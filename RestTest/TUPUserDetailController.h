@@ -10,7 +10,7 @@
 #import <RestKit/RestKit.h>
 #import "TUPUser.h"
 
-@interface TUPUserDetailController : UIViewController
+@interface TUPUserDetailController : UIViewController <UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 // the user that we are going to viewing the details for
 @property(nonatomic, retain) TUPUser *user;
@@ -19,7 +19,9 @@
 @property(nonatomic, retain) IBOutlet UILabel *usernameLabel;
 @property(nonatomic, retain) IBOutlet UITextField *nameField;
 @property(nonatomic, retain) IBOutlet UITextField *ageField;
+@property(nonatomic, retain) IBOutlet UIImageView *userImage;
 
 -(IBAction)update:(id)sender;
+-(void)takeImage;
 
 @end
