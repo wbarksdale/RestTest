@@ -13,13 +13,13 @@
 @interface TUPUserDetailController : UIViewController <UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 // the user that we are going to viewing the details for
-@property(nonatomic, retain) TUPUser *user;
+@property(nonatomic, strong) TUPUser *user;
 
 // properties that are hooked up in the storyboards
-@property(nonatomic, retain) IBOutlet UILabel *usernameLabel;
-@property(nonatomic, retain) IBOutlet UITextField *nameField;
-@property(nonatomic, retain) IBOutlet UITextField *ageField;
-@property(nonatomic, retain) IBOutlet UIImageView *userImage;
+@property(nonatomic, strong) IBOutlet UILabel *usernameLabel;
+@property(nonatomic, strong) IBOutlet UITextField *nameField;
+@property(nonatomic, strong) IBOutlet UITextField *ageField;
+@property(nonatomic, strong) IBOutlet UIImageView *userImage;
 
 -(IBAction)update:(id)sender;
 -(void)takeImage;

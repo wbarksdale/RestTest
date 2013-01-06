@@ -8,6 +8,12 @@
 
 #import "TUPUserDetailController.h"
 
+// Private Methods
+@interface TUPUserDetailController ()
+@property(nonatomic, strong) UIImage *loadingIcon;
+@end
+
+
 @implementation TUPUserDetailController
 
 // update the user on the server
@@ -36,31 +42,6 @@
                           NSLog(@"Hit error: %@", error);
                       }];
 }
-
-//-(void)uploadUserImage:(UIImage *)image{
-//    NSLog(@"uploading image");
-//    NSData *pngData = UIImagePNGRepresentation(image);
-//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
-//    NSURL *url = [NSURL URLWithString:urlString];
-//    
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//    [request setHTTPMethod:@"PUT"];
-//    [request setValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
-//    [request setValue:@"binary" forHTTPHeaderField:@"Content-Transfer-Encoding"];
-//    [request setHTTPBody:pngData];
-//    
-//    NSHTTPURLResponse *response;
-//    NSError *error = nil;
-//    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//    if(error == nil){
-//        if(response.statusCode == 200)
-//            NSLog(@"ok!");
-//        else
-//            NSLog(@"No way");
-//    }else{
-//        NSLog(@"Error UPloading: %@", error);
-//    }
-//}
 
 -(void)uploadUserImage:(UIImage *)image{
     NSData *imageData = UIImagePNGRepresentation(image);
@@ -109,34 +90,6 @@
     return finalImage;
 }
 
-//-(UIImage *)downloadUserImage:(NSString *)username{
-//    NSLog(@"downloading image");
-//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
-//    NSURL *url = [NSURL URLWithString:urlString];
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//    [request setHTTPMethod:@"GET"];
-//    NSHTTPURLResponse *response;
-//    NSError *error = nil;
-//    
-//    NSData *pngData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//    if(error == nil){
-//        if(response.statusCode == 200){
-//            CFDataRef imgData = (__bridge CFDataRef) pngData;
-//            CGDataProviderRef imgDataProvider = CGDataProviderCreateWithCFData(imgData);
-//            CGImageRef image = CGImageCreateWithPNGDataProvider(imgDataProvider, NULL, true, kCGRenderingIntentDefault);
-//            UIImage *finalImage = [UIImage imageWithCGImage:image];
-//            NSLog(@"width: %f height: %f", finalImage.size.width, finalImage.size.height);
-//            return finalImage;
-//        }
-//        if(response.statusCode == 404){
-//            NSLog(@"404 Response");
-//        }
-//    } else{
-//        NSLog(@"Error Downloading: %@", error);
-//    }
-//    return nil;
-//}
-
 -(void)takeImage{
     
     NSLog(@"Taking Image");
@@ -168,12 +121,13 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [self.userImage setImage:self.loadingIcon];
+    [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
     NSLog(@"MediaType: %@", mediaType);
     UIImage *image = (UIImage *) [info objectForKey: UIImagePickerControllerOriginalImage];
-    [self.userImage setImage:image];
     [self uploadUserImage:image];
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.userImage setImage:image];
 }
 
 // set up all our labels and text fields
@@ -182,11 +136,23 @@
     self.nameField.text = self.user.name;
     self.ageField.text = [self.user.age stringValue];
     
-    UIImage *image = [self downloadUserImage:self.user.username];
-    if(image != nil){
-        NSLog(@"setting image...");
-        [self.userImage setImage:image];
-    }
+    //load the loading icon
+    self.loadingIcon = [UIImage imageNamed:@"spinner.gif"];
+    [self.userImage setImage:self.loadingIcon];
+    
+    //Load the image concurrently from the server
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(queue, ^{
+        UIImage *image = [self downloadUserImage:self.user.username];
+        if(image != nil){
+            //Update the image on the main thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"setting image...");
+                [self.userImage setImage:image];
+                [self.userImage setNeedsDisplay];
+            });
+        }
+    });
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self

@@ -28,6 +28,7 @@
 		5A294605168539AE00B23A22 /* TUPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A294603168539AE00B23A22 /* TUPUser.m */; };
 		5A84F65A168671E30046AE0F /* TUPUserDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A84F659168671E30046AE0F /* TUPUserDetailController.m */; };
 		5A84F65B168671E30046AE0F /* TUPUserDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A84F659168671E30046AE0F /* TUPUserDetailController.m */; };
+		5AEDB26B1699C85100CD56D8 /* spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5AEDB26A1699C85100CD56D8 /* spinner.gif */; };
 		A805273DDB2148AD9CBB4532 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E39413E6953B45408138002D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		5A294603168539AE00B23A22 /* TUPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUPUser.m; sourceTree = "<group>"; };
 		5A84F658168671E30046AE0F /* TUPUserDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUPUserDetailController.h; sourceTree = "<group>"; };
 		5A84F659168671E30046AE0F /* TUPUserDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUPUserDetailController.m; sourceTree = "<group>"; };
+		5AEDB26A1699C85100CD56D8 /* spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = spinner.gif; sourceTree = "<group>"; };
 		E39413E6953B45408138002D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 		5A2945C0168532EC00B23A22 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5AEDB26A1699C85100CD56D8 /* spinner.gif */,
 				5A2945D4168532EC00B23A22 /* MainStoryboard_iPad.storyboard */,
 				5A2945C1168532EC00B23A22 /* RestTest-Info.plist */,
 				5A2945C2168532EC00B23A22 /* InfoPlist.strings */,
@@ -260,6 +263,7 @@
 				5A2945D0168532EC00B23A22 /* Default-568h@2x.png in Resources */,
 				5A2945D3168532EC00B23A22 /* MainStoryboard_iPhone.storyboard in Resources */,
 				5A2945D6168532EC00B23A22 /* MainStoryboard_iPad.storyboard in Resources */,
+				5AEDB26B1699C85100CD56D8 /* spinner.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
