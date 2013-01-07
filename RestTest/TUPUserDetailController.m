@@ -94,22 +94,26 @@
     
     NSLog(@"Taking Image");
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO){
-        NSLog(@"Camera Not Available");
-        return;
-    }
-    
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
-    cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    // Displays a control that allows the user to choose picture or
-    // movie capture, if both are available:
-    cameraUI.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
-    
-    // Hides the controls for moving & scaling pictures, or for
-    // trimming movies. To instead show the controls, use YES.
-    cameraUI.allowsEditing = NO;
-    cameraUI.delegate = self;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO){
+        // User does not have camera, so prepare to get a photo from the library
+        cameraUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        cameraUI.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        cameraUI.allowsEditing = NO;
+        cameraUI.delegate = self;
+    } else {
+        // User has a camera, so prepare to take picture
+        cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        // Displays a control that allows the user to choose picture or
+        // movie capture, if both are available:
+        cameraUI.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
+        
+        // Hides the controls for moving & scaling pictures, or for
+        // trimming movies. To instead show the controls, use YES.
+        cameraUI.allowsEditing = NO;
+        cameraUI.delegate = self;
+    }
     
     [self presentViewController:cameraUI animated:YES completion:nil];
 }
@@ -144,14 +148,16 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^{
         UIImage *image = [self downloadUserImage:self.user.username];
-        if(image != nil){
-            //Update the image on the main thread
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"setting image...");
-                [self.userImage setImage:image];
-                [self.userImage setNeedsDisplay];
-            });
+        if(image == nil) {
+            image = [UIImage imageNamed:@"place_holder.png"];
         }
+        //Update the image on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"setting image...");
+            [self.userImage setImage:image];
+            [self.userImage setNeedsDisplay];
+        });
+
     });
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
