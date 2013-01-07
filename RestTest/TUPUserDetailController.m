@@ -44,7 +44,11 @@
 }
 
 -(void)uploadUserImage:(UIImage *)image{
-    NSData *imageData = UIImagePNGRepresentation(image);
+    
+    //First, correctly orient the picture, so that it is right side up when we pull it back down.
+    UIImage *normalizedImage = [self normalizeImage:image];
+    NSData *imageData = UIImagePNGRepresentation(normalizedImage);
+    
     NSString *urlString = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -117,6 +121,26 @@
     
     [self presentViewController:cameraUI animated:YES completion:nil];
 }
+
+/***************
+ * Because apparently PNG images don't save orientation meta deta,
+ * we need to rotate the image before uploading using this method.
+ * This could also be accomplished using a Cateogory, which allows
+ * ad-hoc extensions of classes. A category would allow you to call
+ * myImage.normalizedImage instead of [self normalizedImage: myImage]
+ * This code was sniped from here:
+ * http://stackoverflow.com/questions/5427656/ios-uiimagepickercontroller-result-image-orientation-after-upload
+ ***************/
+
+- (UIImage *)normalizeImage: (UIImage *) imageToNormalize {
+    if (imageToNormalize.imageOrientation == UIImageOrientationUp) return self;
+    UIGraphicsBeginImageContextWithOptions(imageToNormalize.size, NO, imageToNormalize.scale);
+    [imageToNormalize drawInRect:(CGRect){0, 0, imageToNormalize.size}];
+    UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return normalizedImage;
+}
+
 
 #pragma mark ImagePickerDelegate Methods
 
