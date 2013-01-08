@@ -24,7 +24,6 @@
     // age field should really be "sanitized"
     self.user.age = [NSNumber numberWithInteger:[self.ageField.text integerValue]];
     
-    
     // and to the cloud!
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     [objectManager postObject:self.user
@@ -43,43 +42,72 @@
                       }];
 }
 
+/******************
+ * If you wanted to see what its like to do this the old fashioned way
+ * Here is the code that builds the multipart form data and posts
+ * it to the server
+ *******************/
+//-(void)uploadUserImage:(UIImage *)image{
+//    
+//    //First, correctly orient the picture, so that it is right side up when we pull it back down.
+//    UIImage *normalizedImage = [self normalizeImage:image];
+//    NSData *imageData = UIImagePNGRepresentation(normalizedImage);
+//    
+//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    [request setHTTPMethod:@"POST"];;
+//    NSString *boundary = @"0x0hHai1CanHazB0undar135";
+//    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+//    [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
+//
+//    NSMutableData *body = [NSMutableData data];
+//    [body appendData:
+//     [[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding: NSUTF8StringEncoding]];
+//    [body appendData:
+//     [[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:
+//     [[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:imageData];
+//    [body appendData:
+//     [[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [request setHTTPBody:body];
+//
+//    NSHTTPURLResponse *response;
+//    NSError *error = nil;
+//    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//    if(error == nil){
+//        if(response.statusCode == 200)
+//            NSLog(@"ok!");
+//        else
+//            NSLog(@"No way");
+//    }else{
+//        NSLog(@"Error UPloading: %@", error);
+//    }
+//}
+
+
 -(void)uploadUserImage:(UIImage *)image{
     
     //First, correctly orient the picture, so that it is right side up when we pull it back down.
     UIImage *normalizedImage = [self normalizeImage:image];
     NSData *imageData = UIImagePNGRepresentation(normalizedImage);
     
-    NSString *urlString = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];;
-    NSString *boundary = @"0x0hHai1CanHazB0undar135";
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
-    [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
-
-    NSMutableData *body = [NSMutableData data];
-    [body appendData:
-     [[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding: NSUTF8StringEncoding]];
-    [body appendData:
-     [[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:
-     [[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:imageData];
-    [body appendData:
-     [[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [request setHTTPBody:body];
-
-    NSHTTPURLResponse *response;
-    NSError *error = nil;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if(error == nil){
-        if(response.statusCode == 200)
-            NSLog(@"ok!");
-        else
-            NSLog(@"No way");
-    }else{
-        NSLog(@"Error UPloading: %@", error);
-    }
+    NSString *path = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
+    
+    // Post the picture to the server using Restkit
+    NSMutableURLRequest *request =
+    [[RKObjectManager sharedManager] multipartFormRequestWithObject: nil
+                                                             method: RKRequestMethodPOST
+                                                               path: path
+                                                         parameters: nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData){
+                                                             [formData appendPartWithFileData:imageData
+                                                                                         name:@"image"
+                                                                                     fileName:@"photo.png"
+                                                                                     mimeType:@"application/octet-stream"];
+                                                         }];
+    RKObjectRequestOperation *operation = [[RKObjectManager sharedManager] objectRequestOperationWithRequest:request success:nil failure:nil];
+    [[RKObjectManager sharedManager] enqueueObjectRequestOperation:operation];
 }
 
 -(UIImage *)downloadUserImage:(NSString *)username{
@@ -133,7 +161,7 @@
  ***************/
 
 - (UIImage *)normalizeImage: (UIImage *) imageToNormalize {
-    if (imageToNormalize.imageOrientation == UIImageOrientationUp) return self;
+    if (imageToNormalize.imageOrientation == UIImageOrientationUp) return imageToNormalize;
     UIGraphicsBeginImageContextWithOptions(imageToNormalize.size, NO, imageToNormalize.scale);
     [imageToNormalize drawInRect:(CGRect){0, 0, imageToNormalize.size}];
     UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();

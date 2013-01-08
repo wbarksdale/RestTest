@@ -1,17 +1,17 @@
 
-COCOAPODS: 0.16.0
-
 SPEC CHECKSUMS: 
   RestKit/Testing: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
+  RestKit/Search: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
   RestKit/ObjectMapping: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
+  SOCKit: 179515c1a621dd5652a60e9be02ea4adcd25bc9b
+  RestKit: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
   RestKit/Support: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
   AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
-  RestKit/Search: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
-  RestKit/Network: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
-  SOCKit: 179515c1a621dd5652a60e9be02ea4adcd25bc9b
-  RestKit/Core: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
-  RestKit: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
   RestKit/CoreData: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
+  RestKit/Network: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
+  RestKit/Core: 255d85eb5a52112b7df8b901e5fb73fc5a90f3c8
+
+COCOAPODS: 0.16.0
 
 DEPENDENCIES: 
 - RestKit (~> 0.20.0pre)

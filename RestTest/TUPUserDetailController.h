@@ -10,7 +10,7 @@
 #import <RestKit/RestKit.h>
 #import "TUPUser.h"
 
-@interface TUPUserDetailController : UIViewController <UIImagePickerControllerDelegate, UITextFieldDelegate>
+@interface TUPUserDetailController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 // the user that we are going to viewing the details for
 @property(nonatomic, strong) TUPUser *user;

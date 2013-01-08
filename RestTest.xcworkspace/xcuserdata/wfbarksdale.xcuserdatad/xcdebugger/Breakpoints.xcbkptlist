@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RestTest/TUPUserDetailController.m"
-         timestampString = "379294296.529587"
+         timestampString = "379350873.068164"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
          landmarkName = "-takeImage"
          landmarkType = "5">
       </FileBreakpoint>
