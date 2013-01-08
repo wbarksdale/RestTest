@@ -28,7 +28,7 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     //NSURL *baseURL = [NSURL URLWithString:@"http://localhost:8080"];
-    NSURL *baseURL = [NSURL URLWithString:@"http://192.168.1.96:80"];
+    NSURL *baseURL = [NSURL URLWithString:SERVER_BASE_URL];
     
     AFHTTPClient* client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
     

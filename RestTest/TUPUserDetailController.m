@@ -53,7 +53,7 @@
 //    UIImage *normalizedImage = [self normalizeImage:image];
 //    NSData *imageData = UIImagePNGRepresentation(normalizedImage);
 //    
-//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
+//    NSString *urlString = [NSString stringWithFormat:@"%@/image/%@", SERVER_BASE_URL, self.user.username];
 //    NSURL *url = [NSURL URLWithString:urlString];
 //    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 //    [request setHTTPMethod:@"POST"];;
@@ -93,7 +93,7 @@
     UIImage *normalizedImage = [self normalizeImage:image];
     NSData *imageData = UIImagePNGRepresentation(normalizedImage);
     
-    NSString *path = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
+    NSString *path = [NSString stringWithFormat:@"%@/image/%@", SERVER_BASE_URL, self.user.username];
     
     // Post the picture to the server using Restkit
     NSMutableURLRequest *request =
@@ -112,7 +112,7 @@
 
 -(UIImage *)downloadUserImage:(NSString *)username{
     NSLog(@"downloading image");
-    NSString *urlString = [NSString stringWithFormat:@"http://192.168.1.96:80/image/%@", self.user.username];
+    NSString *urlString = [NSString stringWithFormat:@"%@/image/%@", SERVER_BASE_URL, self.user.username];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSData *pngData = [NSData dataWithContentsOfURL:url];
